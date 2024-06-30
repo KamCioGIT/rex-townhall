@@ -15,11 +15,11 @@ CreateThread(function()
 end)
 
 ---------------------------------
--- main menu
+-- town hall main job menu
 ---------------------------------
 RegisterNetEvent('rex-townhall:client:mainmenu', function()
     lib.registerContext({
-        id = 'main_menu',
+        id = 'townhall_main_menu',
         title = 'Town Hall Menu',
         options = {
             {
@@ -30,72 +30,35 @@ RegisterNetEvent('rex-townhall:client:mainmenu', function()
             },
         }
     })
-    lib.showContext('main_menu')
+    lib.showContext('townhall_main_menu')
 end)
 
----------------------------------
--- jobs menu
----------------------------------
+---------------------------------------------
+-- trader menu
+---------------------------------------------
 RegisterNetEvent('rex-townhall:client:jobsmenu', function()
-    lib.registerContext({
-        id = 'jobs_menu',
-        title = 'Jobs Menu',
-        menu = 'main_menu',
-        options = {
-            {
-                title = 'Unempolyed',
-                serverEvent = 'rex-townhall:server:applyjob',
-                icon = 'fa-solid fa-shield',
-                args = { job = 'unemployed', grade = 0, jobtitle = 'Unempolyed' },
-                arrow = true
+    local options = {}
+    for k,v in pairs(Config.Jobs) do
+        options[#options + 1] = {
+            title = v.title..' (Job Cost $'..v.jobcost..')',
+            icon = v.icon,
+            serverEvent = 'rex-townhall:server:applyjob',
+            args = { 
+                job = v.job,
+                grade = v.grade,
+                jobtitle = v.jobtitle,
+                jobcost = v.jobcost,
+                jobitems = v.jobitems,
             },
-            {
-                title = 'Valentine Law Enforcement',
-                serverEvent = 'rex-townhall:server:applyjob',
-                icon = 'fa-solid fa-shield',
-                args = { job = 'vallaw', grade = 0, jobtitle = 'Valentine Law Enforcement' },
-                arrow = true
-            },
-            {
-                title = 'Rhodes Law Enforcement',
-                serverEvent = 'rex-townhall:server:applyjob',
-                icon = 'fa-solid fa-shield',
-                args = { job = 'rholaw', grade = 0, jobtitle = 'Rhodes Law Enforcement' },
-                arrow = true
-            },
-            {
-                title = 'Blackwater Law Enforcement',
-                serverEvent = 'rex-townhall:server:applyjob',
-                icon = 'fa-solid fa-shield',
-                args = { job = 'blklaw', grade = 0, jobtitle = 'Blackwater Law Enforcement' },
-                arrow = true
-            },
-            {
-                title = 'Strawberry Law Enforcement',
-                serverEvent = 'rex-townhall:server:applyjob',
-                icon = 'fa-solid fa-shield',
-                args = { job = 'strlaw', grade = 0, jobtitle = 'Strawberry Law Enforcement' },
-                arrow = true
-            },
-            {
-                title = 'Saint Denis Law Enforcement',
-                serverEvent = 'rex-townhall:server:applyjob',
-                icon = 'fa-solid fa-shield',
-                args = { job = 'stdenlaw', grade = 0, jobtitle = 'Saint Denis Law Enforcement' },
-                arrow = true
-            },
-            {
-                title = 'Medic',
-                serverEvent = 'rex-townhall:server:applyjob',
-                icon = 'fa-solid fa-heart',
-                args = { job = 'medic', grade = 0, jobtitle = 'Medic' },
-                arrow = true
-            },
+            arrow = true,
         }
-    })
-    lib.showContext('jobs_menu')
-end)
-
-RegisterNetEvent('rex-townhall:client:notifyjob', function(title)
-    lib.notify({ title = 'You now have the job of ' .. title, duration = 7000, type = 'success' })
+        lib.registerContext({
+            id = 'job_menu',
+            title = 'Town Hall Jobs',
+            menu = 'townhall_main_menu',
+            position = 'top-right',
+            options = options
+        })
+        lib.showContext('job_menu')        
+    end
 end)
