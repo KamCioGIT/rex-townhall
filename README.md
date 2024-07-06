@@ -16,5 +16,26 @@
 - ensure that the dependancies are added and started
 - add rex-townhall to your resources folder
 
+# Add Jobs
+- add jobs to "\rsg-core\shared\jobs.lua"
+```
+    ['farmer'] = {
+        label = 'Farmer',
+        defaultDuty = true,
+        offDutyPay = false,
+        grades = {
+            ['0'] = { name = 'Farmer', payment = 5 },
+        },
+    },
+    ['miner'] = {
+        label = 'Miner',
+        defaultDuty = true,
+        offDutyPay = false,
+        grades = {
+            ['0'] = { name = 'Miner', payment = 5 },
+        },
+    },
+```
+
 # Starting the resource
 - add the following to your server.cfg file : ensure rex-townhall
