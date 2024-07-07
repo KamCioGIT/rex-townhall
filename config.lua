@@ -29,32 +29,25 @@ Config.TownHallLocations = {
 ---------------------------------
 Config.Jobs = {
     { 
-		title    = 'Unemployed',
-		icon     = 'fa-solid fa-user-gear',
-		job      = 'unemployed',
-		grade    = 0,
-		jobcost  = 0,
+		title = 'Farmer',
+		description = 'A farmer is a person who runs and works on a farm',
+		icon = 'fa-solid fa-user-gear',
+		job = 'farmer',
+		grade = 0,
+		jobcost = 25,
 		jobitems = {},
-		arrow    = true
+		arrow = true
 	},
     { 
-		title    = 'Farmer',
-		icon     = 'fa-solid fa-user-gear',
-		job      = 'farmer',
-		grade    = 0,
-		jobcost  = 25,
-		jobitems = {},
-		arrow    = true
-	},
-    { 
-		title    = 'Miner',
-		icon     = 'fa-solid fa-user-gear',
-		job      = 'miner',
-		grade    = 0,
-		jobcost  = 25,
+		title = 'Miner',
+		description = 'A miner is a person who makes a living digging for resources',
+		icon = 'fa-solid fa-user-gear',
+		job = 'miner',
+		grade = 0,
+		jobcost = 25,
 		jobitems = {
 			{ item = 'pickaxe', amount = 1 },
 		},
-		arrow    = true
+		arrow = true
 	},
 }

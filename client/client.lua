@@ -41,6 +41,7 @@ RegisterNetEvent('rex-townhall:client:jobsmenu', function()
     for k,v in pairs(Config.Jobs) do
         options[#options + 1] = {
             title = v.title..' (Job Cost $'..v.jobcost..')',
+            description = v.description,
             icon = v.icon,
             event = 'rex-townhall:client:applyjob',
             args = { 
