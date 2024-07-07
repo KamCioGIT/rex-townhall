@@ -34,7 +34,7 @@ RegisterNetEvent('rex-townhall:client:mainmenu', function()
 end)
 
 ---------------------------------------------
--- trader menu
+-- jobs menu
 ---------------------------------------------
 RegisterNetEvent('rex-townhall:client:jobsmenu', function()
     local options = {}
@@ -42,7 +42,7 @@ RegisterNetEvent('rex-townhall:client:jobsmenu', function()
         options[#options + 1] = {
             title = v.title..' (Job Cost $'..v.jobcost..')',
             icon = v.icon,
-            serverEvent = 'rex-townhall:server:applyjob',
+            event = 'rex-townhall:client:applyjob',
             args = { 
                 job = v.job,
                 grade = v.grade,
@@ -59,6 +59,21 @@ RegisterNetEvent('rex-townhall:client:jobsmenu', function()
             position = 'top-right',
             options = options
         })
-        lib.showContext('job_menu')        
+        lib.showContext('job_menu')
     end
+end)
+
+---------------------------------------------
+-- check and apply job
+---------------------------------------------
+RegisterNetEvent('rex-townhall:client:applyjob', function(data)
+
+    RSGCore.Functions.TriggerCallback('rsg-multijob:server:checkjobs', function(canapply)
+        if not canapply then
+            lib.notify({ title = 'You have too many jobs already!', type = 'error', duration = 7000 })
+            return
+        end
+        TriggerServerEvent('rex-townhall:server:applyjob', data)
+    end)
+
 end)
